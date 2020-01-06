@@ -8,17 +8,21 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 find the sum of the even-valued terms.
 """
 
+def run():
+    fib_1 = 1
+    fib_2 = 2
 
-fib_1 = 1
-fib_2 = 2
+    result = 0
+    while fib_2 < 4e6:
+        if fib_2 % 2 == 0:
+            result += fib_2
 
-result = 0
-while fib_2 < 4e6:
-    if fib_2 % 2 == 0:
-        result += fib_2
+        tmp = fib_2
+        fib_2 += fib_1
+        fib_1 = tmp
 
-    tmp = fib_2
-    fib_2 += fib_1
-    fib_1 = tmp
+    return result
 
-print(result)
+if __name__ == '__main__':
+    sol = run()
+    print(sol)

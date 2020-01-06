@@ -26,8 +26,15 @@ def factors(num):
 
     return facs
 
-facs = factors(600851475143)
+def run():
+    facs = factors(600851475143)
 
-for fac in facs:
-    f = factors(fac)
-    print(fac, f)
+    max_factor = 0
+    for fac in facs:
+        f = factors(fac)
+        if len(f) == 1:
+            return fac
+
+if __name__ == '__main__':
+    sol = run()
+    print(sol)

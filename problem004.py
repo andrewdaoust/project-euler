@@ -15,14 +15,19 @@ def palindrome_check(n):
             return False
     return True
 
-palindrome_numbers = []
-for i in range(999, 99, -1):
-    palindrome = False
-    for j in range(i, 99, -1):
-        num = i * j
-        palindrome = palindrome_check(num)
-        print(i, j, num, palindrome)
-        if palindrome:
-            palindrome_numbers.append(num)
-    
-print(max(palindrome_numbers))
+def run():
+    palindrome_numbers = []
+    for i in range(999, 99, -1):
+        palindrome = False
+        for j in range(i, 99, -1):
+            num = i * j
+            palindrome = palindrome_check(num)
+            # print(i, j, num, palindrome)
+            if palindrome:
+                palindrome_numbers.append(num)
+        
+    return max(palindrome_numbers)
+
+if __name__ == '__main__':
+    sol = run()
+    print(sol)

@@ -1,8 +1,6 @@
 """
-By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, 
-we can see that the 6th prime is 13.
-
-What is the 10 001st prime number?
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+Find the sum of all the primes below two million.
 """
 
 from math import sqrt
@@ -20,7 +18,7 @@ def run():
     primes = [2, 3, 5, 7, 11, 13]
 
     n = 3
-    while len(primes) < 10001:
+    while primes[-1] < 2e6:
         pp1 = 6 * n - 1
         pp2 = 6 * n + 1
 
@@ -36,7 +34,7 @@ def run():
 
         n += 1
 
-    return primes[-1]
+    return sum(primes) - primes[-1]
 
 if __name__ == '__main__':
     sol = run()
