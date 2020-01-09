@@ -16,8 +16,32 @@ How many Sundays fell on the first of the month during the
 twentieth century (1 Jan 1901 to 31 Dec 2000)?
 """
 
+def next_month_start(this_month_start, num_days):
+    days = ["Su", "M", "T", "W", "R", "F", "Sa"]
+    i = days.index(this_month_start)
+    extra_days = (i + num_days) % 7
+    
+    return days[extra_days]
+
+
 def run():
-    pass
+    months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    start = 'T'
+
+    sunday_starts = 0
+    for year in range(1901, 2001):
+        extra_day = True if year / 4 == 0 else False
+
+        for i in range(len(months)):
+            days = months[i]
+            if (i == 1) and extra_day:
+                days += 1
+
+            start = next_month_start(start, days)
+            if start == 'Su':
+                sunday_starts += 1
+
+    return sunday_starts
 
 
 if __name__ == '__main__':
