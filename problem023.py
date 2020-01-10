@@ -21,19 +21,59 @@ the sum of two abundant numbers.
 """
 
 from math import sqrt
+from itertools import combinations_with_replacement as cwr  # Use this or combo?
 
 
 def factorize(n):
     factors = [1]
-    for i in range(2, int(sqrt(n))):
+    if n % 2 == 0:
+        r = range(2, int(sqrt(n)))
+    else:
+        r = range(3, int(sqrt(n)), 2)
+
+    for i in r:
         if n % i == 0:
             f = int(n / i)
-            factors.append(i, f)
+            factors.append(i)
+            if f != i:
+                factors.append(f)
     return factors
 
 
+def abundant(n, factors):
+    factors_sum = sum(factors)
+    return True if n < factors_sum else False
+
+
+def deficient(n, factors):
+    factors_sum = sum(factors)
+    return True if n > factors_sum else False
+
+
+def perfect(n, factors):
+    factors_sum = sum(factors)
+    return True if n == factors_sum else False
+
+
 def run():
-    pass
+    abundant_nums = []
+    for i in range(12, 28123):
+        f = factorize(i)
+        is_abundant = abundant(i, f)
+        if is_abundant:
+            abundant_nums.append(i)
+
+    combos = cwr(abundant_nums, 2)
+    abundant_sums = []
+    for combo in combos:
+        abundant_sums.append(sum(combo))
+
+    summation = 0
+    for n in range(1, 28123):
+        if n not in abundant_sums:
+            summation += n
+
+    return summation
 
 
 if __name__ == '__main__':
