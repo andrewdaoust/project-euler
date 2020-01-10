@@ -20,6 +20,18 @@ Find the sum of all the positive integers which cannot be written as
 the sum of two abundant numbers.
 """
 
+from math import sqrt
+
+
+def factorize(n):
+    factors = [1]
+    for i in range(2, int(sqrt(n))):
+        if n % i == 0:
+            f = int(n / i)
+            factors.append(i, f)
+    return factors
+
+
 def run():
     pass
 
