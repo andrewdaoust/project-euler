@@ -26,10 +26,11 @@ from itertools import combinations_with_replacement as cwr  # Use this or combo?
 
 def factorize(n):
     factors = [1]
+    sr = int(sqrt(n)) + 1
     if n % 2 == 0:
-        r = range(2, int(sqrt(n)))
+        r = range(2, sr)
     else:
-        r = range(3, int(sqrt(n)), 2)
+        r = range(3, sr, 2)
 
     for i in r:
         if n % i == 0:
@@ -57,7 +58,7 @@ def perfect(n, factors):
 
 def run():
     abundant_nums = []
-    for i in range(12, 28123):
+    for i in range(12, 20162):
         f = factorize(i)
         is_abundant = abundant(i, f)
         if is_abundant:
@@ -66,12 +67,16 @@ def run():
     combos = cwr(abundant_nums, 2)
     abundant_sums = []
     for combo in combos:
+        if combo[0] * 2 > 20162:
+            break
         abundant_sums.append(sum(combo))
 
+    abundant_sums = list(set(abundant_sums))
     summation = 0
-    for n in range(1, 28123):
-        if n not in abundant_sums:
-            summation += n
+    for n in range(1, 20162):
+        if n in abundant_sums:
+            continue
+        summation += n
 
     return summation
 
